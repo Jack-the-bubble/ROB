@@ -1,24 +1,24 @@
 function decv = bayescls(samples, pdfunc, pdparams, apriori)
 % Klasyfikator Bayesa 
-% samples - macierz próbek do klasyfikacji (próbka = wiersz)
-% pdfunc - uchwyt do funkcji licz¹cej pdf 
-% pdparams - parametry dla funkcji licz¹cej pdf
+% samples - macierz prÃ³bek do klasyfikacji (prÃ³bka = wiersz)
+% pdfunc - uchwyt do funkcji liczÂ¹cej pdf 
+% pdparams - parametry dla funkcji liczÂ¹cej pdf
 % 	pdparams.labels - etykiety klas
-% apriori - wektor prawdopodobieñstw apriori (wierszowy)
+% apriori - wektor prawdopodobieÃ±stw apriori (wierszowy)
 % decv - kolumnowy wektor etykiet (wynik klasyfikacji)
 
 	pdfs = pdfunc(samples, pdparams);
-	% a priori uwzglêdniamy tylko, jeœli podano parametr
+	% a priori uwzglÃªdniamy tylko, jeÂœli podano parametr
 	if nargin >= 4
-		% podobnej konstrukcji u¿yliœmy na pierwszych zajêciach:
+		% podobnej konstrukcji uÂ¿yliÂœmy na pierwszych zajÃªciach:
 		% 	pdfs .*= repmat(apriori, rows(pdfs), 1);
-		% bardziej efektywne jest u¿ycie funkcji bsxfun:
+		% bardziej efektywne jest uÂ¿ycie funkcji bsxfun:
 		pdfs = bsxfun(@times, pdfs, apriori);
 	end
 	
-	% nie interesuje nas konkretna wartoœæ gêstoœci...
+	% nie interesuje nas konkretna wartoÂœÃ¦ gÃªstoÂœci...
 	[~, mi] = max(pdfs, [], 2);
 	
-	% translacja numer klasy -> etykieta
+	% translacja numer klasy -> etykieta  -Å¼eby unkinÄ…Ä‡ bÅ‚Ä™du wybrania zÅ‚ej klasy
 	decv = pdparams.labels(mi);
 end

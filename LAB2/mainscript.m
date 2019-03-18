@@ -5,30 +5,31 @@ size(pdf_test)
 % ile jest klas?
 labels = unique(pdf_test(:,1))
 
-% ile jest próbek w ka¿dej klasie?
+% ile jest prÃ³bek w kaÂ¿dej klasie?
 [labels'; sum(pdf_test(:,1) == labels')]
-		  % ^^^ dobrze by³oby pomyœleæ o tym wyra¿eniu
+		  % ^^^ dobrze byÂ³oby pomyÂœleÃ¦ o tym wyraÂ¿eniu
 
-% jak uk³adaj¹ siê próbki?
+% jak ukÂ³adajÂ¹ siÃª prÃ³bki?
 plot2features(pdf_test, 2, 3)
 
 
 pdfindep_para = para_indep(pdf_test);
-% para_indep jest do zaimplementowania, tak ¿eby dawa³a:
+% para_indep jest do zaimplementowania, tak Â¿eby dawaÂ³a:
 
 % pdfindep_para =
 %  scalar structure containing the fields:
 %    labels =
 %       1
 %       2
-%    mu =
-%       0.7970000   0.8200000
-%      -0.0090000   0.0270000
-%    sig =
+%    mu = %wartosci srednich
+%	%cecha 1	cecha 2
+%       0.7970000   0.8200000 %klasa 1
+%      -0.0090000   0.0270000 %klasa 2
+%    sig = wartosci odchylen standardowych
 %       0.21772   0.19172
 %       0.19087   0.27179
 
-% teraz do zaimplementowania jest sama funkcja licz¹ca pdf 
+% teraz do zaimplementowania jest sama funkcja liczÂ¹ca pdf (liczenie gestosci)
 pi_pdf = pdf_indep(pdf_test([2 7 12 17],2:end), pdfindep_para)
 
 %pi_pdf =
@@ -37,7 +38,7 @@ pi_pdf = pdf_indep(pdf_test([2 7 12 17],2:end), pdfindep_para)
 %  6.7800e-011  2.7920e-001
 %  5.6610e-008  1.8097e+000
 
-% wielowymiarowy rozk³ad normalny - parametry ...
+% wielowymiarowy rozkÂ³ad normalny - parametry ...
 
 pdfmulti_para = para_multi(pdf_test)
 
@@ -46,18 +47,18 @@ pdfmulti_para = para_multi(pdf_test)
 %    labels =
 %       1
 %       2
-%    mu =
+%    mu = %wektor wierszowy srednich dla wszystkich cech
 %       0.7970000   0.8200000
 %      -0.0090000   0.0270000
 %    sig =
-%    ans(:,:,1) =
+%    ans(:,:,1) = 
 %       0.047401   0.018222
 %       0.018222   0.036756
 %    ans(:,:,2) =
 %       0.036432  -0.033186
 %      -0.033186   0.073868  
 
-% ... i funkcja licz¹ca gêstoœæ
+% ... i funkcja liczÂ¹ca gÃªstoÂœÃ¦
 pm_pdf = pdf_multi(pdf_test([2 7 12 17],2:end), pdfmulti_para)
 
 %pm_pdf =
@@ -68,7 +69,7 @@ pm_pdf = pdf_multi(pdf_test([2 7 12 17],2:end), pdfmulti_para)
 
 % parametry dla aproksymacji oknem Parzena
 pdfparzen_para = para_parzen(pdf_test, 0.5)
-									 % ^^^ szerokoœæ okna
+				     % ^^^ szerokoÂœÃ¦ okna
 
 %pdfparzen_para =
 %  scalar structure containing the fields:
@@ -101,12 +102,12 @@ pp_pdf = pdf_parzen(pdf_test([2 7 12 17],2:end), pdfparzen_para)
 %  2.0439e-006  1.9815e+000
 
 
-% wreszcie mo¿na zaj¹æ siê kartami!
+% wreszcie moÂ¿na zajÂ¹Ã¦ siÃª kartami!
 load train.txt
 load test.txt
 
-% poniewa¿ dane s¹ w istocie z dwóch populacji zmieniamy
-% etykiety "klienta" na etykiety pasuj¹ce do klasyfikacji
+% poniewaÂ¿ dane sÂ¹ w istocie z dwÃ³ch populacji zmieniamy
+% etykiety "klienta" na etykiety pasujÂ¹ce do klasyfikacji
 for i=77:152:1824
 	train(i:i+75,1) += 4;
 	test(i:i+75,1) += 4;
@@ -119,58 +120,58 @@ labels = unique(train(:,1))
 unique(test(:,1))
 [labels'; sum(train(:,1) == labels')]
 
-% pierwszym zadaniem po za³adowaniu danych jest sprawdzenie,
-% czy w zbiorze ucz¹cym nie ma próbek odstaj¹cych
-% do realizacji tego zadania przydadz¹ siê funkcje licz¹ce
+% pierwszym zadaniem po zaÂ³adowaniu danych jest sprawdzenie,
+% czy w zbiorze uczÂ¹cym nie ma prÃ³bek odstajÂ¹cych
+% do realizacji tego zadania przydadzÂ¹ siÃª funkcje liczÂ¹ce
 % proste statystyki: mean, median, std, 
-% wyœwietlenie histogramu cech(y): hist
+% wyÂœwietlenie histogramu cech(y): hist
 % spojrzenie na dwie cechy na raz: plot2features (dostarczona w pakiecie)
 
 [mean(train); median(train)]
 hist(train(:,1))
 plot2features(train, 4, 6)
 
-% do identyfikacji odstaj¹cych próbek doskonale nadaj¹ siê wersje
-% funkcji min i max z dwoma argumentami wyjœciowymi
+% do identyfikacji odstajÂ¹cych prÃ³bek doskonale nadajÂ¹ siÃª wersje
+% funkcji min i max z dwoma argumentami wyjÂœciowymi
 
 [mv midx] = min(train)
 
-% poniewa¿ wartoœci minimalne czy maksymalne da siê wyznaczyæ zawsze,
-% dobrze zweryfikowaæ ich odstawanie spogl¹daj¹c przynajmniej na s¹siadów
-% podejrzanej próbki w zbiorze ucz¹cym
+% poniewaÂ¿ wartoÂœci minimalne czy maksymalne da siÃª wyznaczyÃ¦ zawsze,
+% dobrze zweryfikowaÃ¦ ich odstawanie spoglÂ¹dajÂ¹c przynajmniej na sÂ¹siadÃ³w
+% podejrzanej prÃ³bki w zbiorze uczÂ¹cym
 
-% powiedzmy, ¿e podejrzana jest próbka 58
+% powiedzmy, Â¿e podejrzana jest prÃ³bka 58
 midx = 58
 train(midx-1:midx+1, :)
-% tu akurat wysz³y ró¿ne klasy, wiêc porównanie jest trudne...
+% tu akurat wyszÂ³y rÃ³Â¿ne klasy, wiÃªc porÃ³wnanie jest trudne...
 
-% jeœli nabra³em przekonania, ¿e próbka midx jest do usuniêcia, to:
+% jeÂœli nabraÂ³em przekonania, Â¿e prÃ³bka midx jest do usuniÃªcia, to:
 size(train)
 train(midx, :) = [];
 size(train)
 
-% procedurê szukania i usuwania wartoœci odstaj¹cych trzeba powtarzaæ do skutku
+% procedurÃª szukania i usuwania wartoÂœci odstajÂ¹cych trzeba powtarzaÃ¦ do skutku
 
-% po usuniêciu wartoœci odstaj¹cych mo¿na zaj¹æ siê wyborem DWÓCH cech dla klasyfikacji
-% w tym przypadku w zupe³noœci wystarczy poogl¹daæ wykresy dwóch cech i wybraæ te, które
-% daj¹ w miarê dobrze odseparowane od siebie klasy
+% po usuniÃªciu wartoÂœci odstajÂ¹cych moÂ¿na zajÂ¹Ã¦ siÃª wyborem DWÃ“CH cech dla klasyfikacji
+% w tym przypadku w zupeÂ³noÂœci wystarczy pooglÂ¹daÃ¦ wykresy dwÃ³ch cech i wybraÃ¦ te, ktÃ³re
+% dajÂ¹ w miarÃª dobrze odseparowane od siebie klasy
 
-% Po ustaleniu cech (dok³adniej: indeksów kolumn, w których cechy siedz¹):
+% Po ustaleniu cech (dokÂ³adniej: indeksÃ³w kolumn, w ktÃ³rych cechy siedzÂ¹):%trzecia i piÄ…ta cecha siÄ™ nie nadajÄ…?
 first_idx = 4;
 second_idx = 6;
 train = train(:, [1 first_idx second_idx]);
 test = test(:, [1 first_idx second_idx]);
 
-% to nie jest najros¹dniejszy wybór; 4 i 6 na pewno trzeba zmieniæ
+% to nie jest najrosÂ¹dniejszy wybÃ³r; 4 i 6 na pewno trzeba zmieniÃ¦
 
-% tutaj jawnie tworzê strukturê z parametrami dla klasyfikatora Bayesa 
-% (po prawdzie, to dla funkcji licz¹cej gêstoœæ prawdobieñstwa) z za³o¿eniem,
-% ¿e cechy s¹ niezale¿ne
+% tutaj jawnie tworzÃª strukturÃª z parametrami dla klasyfikatora Bayesa 
+% (po prawdzie, to dla funkcji liczÂ¹cej gÃªstoÂœÃ¦ prawdobieÃ±stwa) z zaÂ³oÂ¿eniem,
+% Â¿e cechy sÂ¹ niezaleÂ¿ne
 
 pdfindep_para = para_indep(train);
 pdfmulti_para = para_multi(train);
 pdfparzen_para = para_parzen(train, 0.001); 
-% w sprawozdaniu trzeba podawaæ szerokoœæ okna (nie liczymy tego parametru z danych!)	
+% w sprawozdaniu trzeba podawaÃ¦ szerokoÂœÃ¦ okna (nie liczymy tego parametru z danych!)	
 
 % wyniki do punktu 3
 base_ercf = zeros(1,3);
@@ -179,10 +180,10 @@ base_ercf(2) = mean(bayescls(test(:,2:end), @pdf_multi, pdfmulti_para) != test(:
 base_ercf(3) = mean(bayescls(test(:,2:end), @pdf_parzen, pdfparzen_para) != test(:,1));
 base_ercf
 
-% W kolejnym punkcie przyda siê funkcja reduce, która redukuje liczbê próbek w poszczególnych
-% klasach (w tym przypadku redukcja bêdzie taka sama we wszystkich klasach - ZBIORU UCZ¥CEGO)
-% Poniewa¿ reduce ma losowaæ próbki, to eksperyment nale¿y powtórzyæ 5 (lub wiêcej) razy
-% W sprawozdaniu proszê podaæ tylko wartoœæ œredni¹ i odchylenie standardowe wspó³czynnika b³êdu
+% W kolejnym punkcie przyda siÃª funkcja reduce, ktÃ³ra redukuje liczbÃª prÃ³bek w poszczegÃ³lnych
+% klasach (w tym przypadku redukcja bÃªdzie taka sama we wszystkich klasach - ZBIORU UCZÂ¥CEGO)
+% PoniewaÂ¿ reduce ma losowaÃ¦ prÃ³bki, to eksperyment naleÂ¿y powtÃ³rzyÃ¦ 5 (lub wiÃªcej) razy
+% W sprawozdaniu proszÃª podaÃ¦ tylko wartoÂœÃ¦ ÂœredniÂ¹ i odchylenie standardowe wspÃ³Â³czynnika bÂ³Ãªdu
 
 parts = [0.1 0.25 0.5];
 rep_cnt = 5; % przynajmniej
@@ -191,7 +192,7 @@ rep_cnt = 5; % przynajmniej
 %
 
 
-% Punkt 5 dotyczy jedynie klasyfikatora z oknem Parzena (na pe³nym zbiorze ucz¹cym)
+% Punkt 5 dotyczy jedynie klasyfikatora z oknem Parzena (na peÂ³nym zbiorze uczÂ¹cym)
 
 parzen_widths = [0.0001, 0.0005, 0.001, 0.005, 0.01];
 parzen_res = zeros(1, columns(parzen_widths));
@@ -200,10 +201,10 @@ parzen_res = zeros(1, columns(parzen_widths));
 %
 
 [parzen_widths; parzen_res]
-% Tu a¿ prosi siê do³o¿yæ do danych numerycznych wykres
+% Tu aÂ¿ prosi siÃª doÂ³oÂ¿yÃ¦ do danych numerycznych wykres
 semilogx(parzen_widths, parzen_res)
 
-% W punkcie 6 redukcja dotyczy ZBIORU TESTOWEGO (nie ma potrzeby zmiany zbioru ucz¹cego)
+% W punkcie 6 redukcja dotyczy ZBIORU TESTOWEGO (nie ma potrzeby zmiany zbioru uczÂ¹cego)
 % 
 apriori = [0.165 0.085 0.085 0.165 0.165 0.085 0.085 0.165];
 parts = [1.0 0.5 0.5 1.0 1.0 0.5 0.5 1.0];
@@ -212,13 +213,13 @@ parts = [1.0 0.5 0.5 1.0 1.0 0.5 0.5 1.0];
 %
 
 
-% W ostatnim punkcie trzeba zastanowiæ siê nad normalizacj¹
+% W ostatnim punkcie trzeba zastanowiÃ¦ siÃª nad normalizacjÂ¹
 std(train(:,2:end))
-% Mo¿e warto sprawdziæ, jak to wygl¹da w poszczególnych klasach?
+% MoÂ¿e warto sprawdziÃ¦, jak to wyglÂ¹da w poszczegÃ³lnych klasach?
 
 % Normalizacja potrzebna?
-% Jeœli TAK, to jej parametry s¹ liczone na zbiorze ucz¹cym
-% Procedura normalizacji jest aplikowana do zbioru ucz¹cego i testowego
+% JeÂœli TAK, to jej parametry sÂ¹ liczone na zbiorze uczÂ¹cym
+% Procedura normalizacji jest aplikowana do zbioru uczÂ¹cego i testowego
 
 % YOUR CODE GOES HERE 
 %
