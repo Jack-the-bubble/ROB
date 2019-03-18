@@ -10,4 +10,6 @@ labels = unique(pdf_test(:,1))
 		  % ^^^ dobrze by³oby pomyleæ o tym wyra¿eniu
 
 % jak uk³adaj¹ siê próbki?
-%plot2features(pdf_test, 2, 3)
+plot2features(pdf_test, 2, 3)
+
+
