@@ -1,14 +1,18 @@
 function pdf = pdf_multi(pts, para)
-% Liczy funkcjê gêstoœci prawdopodobieñstwa wielowymiarowego r. normalnego
-% pts zawiera punkty, dla których liczy siê f-cjê gêstoœci (punkt = wiersz)
-% para - struktura zawieraj¹ca parametry:
-%	para.mu - wartoœci œrednie cech (wiersz na klasê)
-%	para.sig - macierze kowariancji cech (warstwa na klasê)
-% pdf - macierz gêstoœci prawdopodobieñstwa
-%	liczba wierszy = liczba próbek w pts
+% Liczy funkcjï¿½ gï¿½stoï¿½ci prawdopodobieï¿½stwa wielowymiarowego r. normalnego
+% pts zawiera punkty, dla ktï¿½rych liczy siï¿½ f-cjï¿½ gï¿½stoï¿½ci (punkt = wiersz)
+% para - struktura zawierajï¿½ca parametry:
+%	para.mu - wartoï¿½ci ï¿½rednie cech (wiersz na klasï¿½)
+%	para.sig - macierze kowariancji cech (warstwa na klasï¿½)
+% pdf - macierz gï¿½stoï¿½ci prawdopodobieï¿½stwa
+%	liczba wierszy = liczba prï¿½bek w pts
 %	liczba kolumn = liczba klas
-
-	pdf = rand(rows(pts), rows(para.mu));
+  cov = para.sig(:, :, 1)
+  u = (para.mu(1,:))'
+  n = columns(pts)
+  X = pts'
+  
+	pdf = 1/((2*pi)^(n/2)*det(cov)^0.5)*exp(-0.5*(X-u)'*cov^(-1)*(X-u));
 	
-	% liczenie gêstoœci uproœci u¿ycie funkcji mvnpdf
+	% liczenie gï¿½stoï¿½ci uproï¿½ci uï¿½ycie funkcji mvnpdf
 end

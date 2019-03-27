@@ -33,6 +33,7 @@ pdfindep_para = para_indep(pdf_test);
 pi_pdf = pdf_indep(pdf_test([2 7 12 17],2:end), pdfindep_para)
 
 %pi_pdf =
+
 %  1.4700e+000  4.5476e-007
 %  3.4621e+000  4.9711e-005
 %  6.7800e-011  2.7920e-001

@@ -13,7 +13,7 @@ function para = para_indep(ts)
 
 	% tu trzeba wype³niæ wartoci rednie i odchylenie standardowe dla klas
 
-	((sqrt(cov(ts(ts(:,1) == labels(1), 2:end), ts(ts(:,1) == labels(1),2:end)))(eye(rows(labels))==1)))'
+	%((sqrt(cov(ts(ts(:,1) == labels(1), 2:end), ts(ts(:,1) == labels(1),2:end)))(eye(rows(labels))==1)))'
 	for i = 1:rows(labels)
 		%liczenie sredniej
 		para.mu(i, :)=mean(ts(ts(:,1) == labels(i), 2:end));

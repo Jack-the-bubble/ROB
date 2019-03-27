@@ -1,11 +1,11 @@
 function para = para_parzen(ts, width = 0.0001)
 % Liczy parametry dla funkcji pdf_parzen
-% ts zbiór ucz¹cy (próbka = wiersz; w pierwszej kolumnie etykiety)
-% width - szerokoœæ okna Parzena 
-% para - struktura zawieraj¹ca parametry:
+% ts zbiï¿½r uczï¿½cy (prï¿½bka = wiersz; w pierwszej kolumnie etykiety)
+% width - szerokoï¿½ï¿½ okna Parzena 
+% para - struktura zawierajï¿½ca parametry:
 %	para.labels - etykiety klas
-%	para.samples - tablica komórek zawieraj¹ca próbki z poszczególnych klas
-%	para.parzenw - szerokoœæ okna Parzena
+%	para.samples - tablica komï¿½rek zawierajï¿½ca prï¿½bki z poszczegï¿½lnych klas
+%	para.parzenw - szerokoï¿½ï¿½ okna Parzena
 
 	labels = unique(ts(:,1));
 	para.labels = labels;

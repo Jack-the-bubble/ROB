@@ -1,16 +1,21 @@
 function pdf = pdf_indep(pts, para)
-% Liczy funkcjê gêstoœci prawdopodobieñstwa przy za³o¿eniu, ¿e cechy s¹ niezale¿ne
-% pts zawiera punkty, dla których liczy siê f-cjê gêstoœci (punkt = wiersz, bez etykiety!)
-% para - struktura zawieraj¹ca parametry:
-%	para.mu - wartoœci œrednie cech (wiersz na klasê)
-%	para.sig - odchylenia standardowe cech (wiersz na klasê)
-% pdf - macierz gêstoœci prawdopodobieñstwa
-%	liczba wierszy = liczba próbek w pts
+% Liczy funkcjï¿½ gï¿½stoï¿½ci prawdopodobieï¿½stwa przy zaï¿½oï¿½eniu, ï¿½e cechy sï¿½ niezaleï¿½ne
+% pts zawiera punkty, dla ktï¿½rych liczy siï¿½ f-cjï¿½ gï¿½stoï¿½ci (punkt = wiersz, bez etykiety!)
+% para - struktura zawierajï¿½ca parametry:
+%	para.mu - wartoï¿½ci ï¿½rednie cech (wiersz na klasï¿½)
+%	para.sig - odchylenia standardowe cech (wiersz na klasï¿½)
+% pdf - macierz gï¿½stoï¿½ci prawdopodobieï¿½stwa
+%	liczba wierszy = liczba prï¿½bek w pts
 %	liczba kolumn = liczba klas
 
-	% znam rozmiar wyniku, wiêc go alokujê
+	% znam rozmiar wyniku, wiï¿½c go alokujï¿½
 	pdf = zeros(rows(pts), rows(para.mu));
 
-	% tu trzeba policzyæ wartoœæ funkcji gêstoœci
-	% jako iloczyn gêstoœci jednowymiarowych
+	% tu trzeba policzyï¿½ wartoï¿½ï¿½ funkcji gï¿½stoï¿½ci
+	% jako iloczyn gï¿½stoï¿½ci jednowymiarowych
+  
+  normpdf(pdf_test(2, 2), 0.7970000, 0.21772)*normpdf(pdf_test(2, 3), 0.8200000, 0.19172)
+  
+  
+  
 end
