@@ -14,7 +14,9 @@ function para = para_multi(ts)
 	% tu trzeba wype�ni� warto�ci �rednie i macierze kowariancji dla klas
 	% macierz kowariancji liczy funkcja cov
   for i = 1: rows(labels)
+    %obliczenie wartosci srednich cech jak w przypadku cech niezaleznych
     para.mu(i, :)=mean(ts(ts(:,1) == labels(i), 2:end));
+    %obliczenie macierzy kowariancji
     para.sig(:,:, i) = cov(ts(ts(:,1) == labels(i), 2:end), ts(ts(:,1) == labels(i),2:end));
   end
 

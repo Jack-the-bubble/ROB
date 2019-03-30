@@ -19,8 +19,8 @@ function para = para_indep(ts)
 		para.mu(i, :)=mean(ts(ts(:,1) == labels(i), 2:end));
 		%liczenie odchylenia
 		%wybiera próbki o tych samych labelach w każdej iteracji i liczy kovariancję, następnie spłaszcza macierz do wektora
-		para.sig(i, :) = ((sqrt(cov(ts(ts(:,1) == labels(i), 2:end), ts(ts(:,1) == labels(i),2:end)))(eye(rows(labels))==1)));
-		
+		%para.sig(i, :) = ((sqrt(cov(ts(ts(:,1) == labels(i), 2:end), ts(ts(:,1) == labels(i),2:end)))(eye(rows(labels))==1)));
+		para.sig(i, :) = std(ts(ts(:,1) == labels(i), 2:end));
 	end
 	
 end

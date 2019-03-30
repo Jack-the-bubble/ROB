@@ -144,6 +144,11 @@ plot2features(train, 4, 6)
 % powiedzmy, ¿e podejrzana jest próbka 58
 midx = 58
 train(midx-1:midx+1, :)
+
+%wywalic 642 i 186
+
+
+
 % tu akurat wysz³y ró¿ne klasy, wiêc porównanie jest trudne...
 
 % jeli nabra³em przekonania, ¿e próbka midx jest do usuniêcia, to:
@@ -158,8 +163,8 @@ size(train)
 % daj¹ w miarê dobrze odseparowane od siebie klasy
 
 % Po ustaleniu cech (dok³adniej: indeksów kolumn, w których cechy siedz¹):%trzecia i piąta cecha się nie nadają?
-first_idx = 4;
-second_idx = 6;
+first_idx = 4; %zmien na 2
+second_idx = 6; % zmien na 4
 train = train(:, [1 first_idx second_idx]);
 test = test(:, [1 first_idx second_idx]);
 

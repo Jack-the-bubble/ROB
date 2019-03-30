@@ -1,7 +1,7 @@
 function rds = reduce(ds, parts)
-% Funkcja redukcji liczby próbek poszczególnych klas w zbiorze ds
-% ds - zbiór danych do redukcji; pierwsza kolumna zawiera etykietê
-% parts - wierszowy wektor wspó³czynników redukcji dla poszczególnych klas
+% Funkcja redukcji liczby prï¿½bek poszczegï¿½lnych klas w zbiorze ds
+% ds - zbiï¿½r danych do redukcji; pierwsza kolumna zawiera etykietï¿½
+% parts - wierszowy wektor wspï¿½ï¿½czynnikï¿½w redukcji dla poszczegï¿½lnych klas
 
 	labels = unique(ds(:,1));
 	if rows(labels) ~= columns(parts)
@@ -14,4 +14,17 @@ function rds = reduce(ds, parts)
 		
 	% zdecydowanie wypadaloby uzyc randperm do mieszania probek w klasach
 	% ta implementacja jest daleka od doskonalosci
-	rds = ds;
+	rds = [];
+  %dla kaÅ¼dej klasy
+  for classID=1: rows(labels)
+    pom = [];
+    %wybierz tylko jednÄ… klasÄ™ do zredukowania
+    pom = ds(ds(:, 1)==labels(classID), :);
+    
+    %
+    perms = floor(parts(classID)*rows(pom));
+    %pomieszaj zbiÃ³r
+    pom_rows=randperm(rows(pom), perms);
+    %obetnij prÃ³bki z kaÅ¼dej klasy i wrzuÄ‡ do wyniku
+    rds = [rds; pom(pom_rows,:)];
+end

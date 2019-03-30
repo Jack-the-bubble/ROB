@@ -1,15 +1,28 @@
 function pdf = pdf_parzen(pts, para)
-% Aproksymuje wartoœæ gêstoœci prawdopodobieñstwa z wykorzystaniem okna Parzena
-% pts zawiera punkty, dla których liczy siê f-cjê gêstoœci (punkt = wiersz)
-% para - struktura zawieraj¹ca parametry:
-%	para.samples - tablica komórek zawieraj¹ca próbki z poszczególnych klas
-%	para.parzenw - szerokoœæ okna Parzena
-% pdf - macierz gêstoœci prawdopodobieñstwa
-%	liczba wierszy = liczba próbek w pts
+% Aproksymuje wartoï¿½ï¿½ gï¿½stoï¿½ci prawdopodobieï¿½stwa z wykorzystaniem okna Parzena
+% pts zawiera punkty, dla ktï¿½rych liczy siï¿½ f-cjï¿½ gï¿½stoï¿½ci (punkt = wiersz)
+% para - struktura zawierajï¿½ca parametry:
+%	para.samples - tablica komï¿½rek zawierajï¿½ca prï¿½bki z poszczegï¿½lnych klas
+%	para.parzenw - szerokoï¿½ï¿½ okna Parzena
+% pdf - macierz gï¿½stoï¿½ci prawdopodobieï¿½stwa
+%	liczba wierszy = liczba prï¿½bek w pts
 %	liczba kolumn = liczba klas
 
 	pdf = rand(rows(pts), rows(para.samples));
 	
-	% przy liczeniu gêstoœci warto zastanowiæ siê
-	% nad kolejnoœci¹ obliczeñ (pêtli)
+	% przy liczeniu gï¿½stoï¿½ci warto zastanowiï¿½ siï¿½
+	% nad kolejnoï¿½ciï¿½ obliczeï¿½ (pï¿½tli)
+  for i = 1:rows(para.samples)
+    %szerokosc okna
+    hn= para.parzenw / sqrt(rows(para.samples{i}));
+    %
+    singlpdf = zeros(size(para.samples{i}));
+    for j = 1:rows(pts)
+      for ft = 1:columns(pts)
+        singlpdf(:, ft) = normpdf(para.samples{i}(:, ft),pts(j, ft), hn);
+      end
+      pdf(j, i) = mean(prod(singlpdf, 2));
+    end
+  end
+  
 end

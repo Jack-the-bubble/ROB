@@ -7,12 +7,15 @@ function pdf = pdf_multi(pts, para)
 % pdf - macierz g�sto�ci prawdopodobie�stwa
 %	liczba wierszy = liczba pr�bek w pts
 %	liczba kolumn = liczba klas
-  cov = para.sig(:, :, 1)
-  u = (para.mu(1,:))'
-  n = columns(pts)
-  X = pts'
-  
-	pdf = 1/((2*pi)^(n/2)*det(cov)^0.5)*exp(-0.5*(X-u)'*cov^(-1)*(X-u));
 	
+  %alokacja pamieci
+  pm_pdf=zeros(rows(pts), rows(para.mu));
+  labels = para.labels;
+  
+  for i=1:size(labels, 1)
+    pdf(:, i)= mvnpdf(pts, para.mu(i, :), para.sig(:, :, i));
+  end
+  
+  
 	% liczenie g�sto�ci upro�ci u�ycie funkcji mvnpdf
 end
