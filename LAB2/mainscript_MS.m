@@ -51,7 +51,7 @@ test = test(:, [1 cechy]);
 
 
 %prawdopodobieństwo apriori:
-apriori = [0.25 0.25 0.25 0.25 0.25 0.25 0.25 0.25];
+apriori = [0.125 0.125 0.125 0.125 0.125 0.125 0.125 0.125];
 
 pdfindep_para = para_indep(train);
 pdfmulti_para = para_multi(train);
@@ -215,10 +215,6 @@ display(["---niezależne: " num2str(indep.mean)])
 display(["---wielowymiarowe: " num2str(multi.mean)])
 display(["---Parzen: " num2str(parzen.mean)])
 
-
-
-%%%%%%%%%%%TODO
-%indep_cfmx = confMx(train(:, 1), indep.res)
 
 display(["Zadanie 7. klasyfikacja 1-NN"])
 
