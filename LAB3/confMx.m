@@ -13,3 +13,4 @@ function cfmx = confMx(truelab, declab)
   for i = 1:rows(truelab)
     cfmx(truelab(i), declab(i)) += 1;
   end
+end

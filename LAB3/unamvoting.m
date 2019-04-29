@@ -14,4 +14,7 @@ function clab = unamvoting(tset, clsmx)
 	votes = voting(tset, clsmx);
 
 	[mv clab] = max(votes, [], 2);
+  
 	clab(mv ~= maxvotes) = reject;
+  % jesli więcej niż jedna klasa otrzymała maksymalną ilosc głosów, to odrzuć
+  clab(sum(votes == maxvotes,2) > 1) = reject;
